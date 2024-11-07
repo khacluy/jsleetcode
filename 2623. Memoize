@@ -1,0 +1,31 @@
+/**
+ * @param {Function} fn
+ * @return {Function}
+ */
+function memoize(fn) {
+    const bonhodem = new Map(); 
+    
+    return function(...args) {
+        const key = args.toString(); 
+        if(bonhodem.has(key)){
+            return bonhodem.get(key);
+        }
+        else{
+            let ketqua = fn(...args);
+            bonhodem.set(key,ketqua);
+            return ketqua;
+        }
+    }
+}
+
+
+/** 
+ * let callCount = 0;
+ * const memoizedFn = memoize(function (a, b) {
+ *	 callCount += 1;
+ *   return a + b;
+ * })
+ * memoizedFn(2, 3) // 5
+ * memoizedFn(2, 3) // 5
+ * console.log(callCount) // 1 
+ */
